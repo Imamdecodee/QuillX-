@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuillX - Where Stories Unlock Inspiration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink-blue: #1A1F36;
+            --gold: #F5C518;
+            --cream: #FFF9F2;
+            --dark-gray: #333;
+            --light-gray: #eee;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--cream);
+            color: var(--ink-blue);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            margin-bottom: 0.5em;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--ink-blue);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--gold);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--ink-blue);
+            color: var(--cream);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            color: var(--gold);
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .gold-accent {
+            color: var(--gold);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav li {
+            margin-left: 2rem;
+        }
+
+        nav a {
+            color: var(--cream);
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 31, 54, 0.8), rgba(26, 31, 54, 0.8)), url('https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1173&q=80') no-repeat center center/cover;
+            color: var(--cream);
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--gold);
+            color: var(--ink-blue);
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--cream);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            color: var(--ink-blue);
+        }
+
+        /* Section Styling */
+        .section-title {
+            text-align: center;
+            margin: 4rem 0 2rem;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--gold);
+            margin: 10px auto;
+        }
+
+        /* Story Cards */
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .story-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .story-content {
+            padding: 1.5rem;
+        }
+
+        .story-meta {
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 0.5rem;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--gold);
+        }
+
+        /* Community Section */
+        .community-highlight {
+            background-color: var(--ink-blue);
+            color: var(--cream);
+            padding: 3rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--ink-blue);
+            color: var(--cream);
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .social-icons a {
+            color: var(--cream);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .social-icons a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+                color: var(--cream);
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--ink-blue);
+                padding: 1rem 0;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .stories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-feather-alt logo-icon"></i>
+                <div class="logo-text">Quill<span class="gold-accent">X</span></div>
+            </div>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#featured">Featured Stories</a></li>
+                    <li><a href="#decode">Decode Life</a></li>
+                    <li><a href="#community">Community Corner</a></li>
+                    <li><a href="#vault">Quill Vault</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Where Your Heart Meets Words</h1>
+            <p>QuillX isn't just storytelling — it's a journey of the soul. Discover motivational, emotional, and inspirational tales that unlock your potential.</p>
+            <a href="#featured" class="btn">Explore Stories</a>
+        </div>
+    </section>
+
+    <!-- Featured Stories Section -->
+    <section id="featured" class="container">
+        <h2 class="section-title">Featured Stories</h2>
+        <p class="section-subtitle" style="text-align: center; margin-bottom: 2rem;">Curated tales of motivation and emotion that inspire change.</p>
+        
+        <div class="stories-grid">
+            <!-- Story 1 -->
+            <div class="story-card">
+                <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1052&q=80');"></div>
+                <div class="story-content">
+                    <div class="story-meta">Motivation · 8 min read</div>
+                    <h3>The Bridge of Second Chances</h3>
+                    <p>Lena stood at the edge of the crumbling bridge, facing the ghost of the mistake that haunted her for a decade. This time, she wouldn't run.</p>
+                    <a href="./The Bridge of Second Chances.html" class="read-more">Read Full Story →</a>
+                </div>
+            </div>
+            
+            <!-- Story 2 -->
+            <div class="story-card">
+                <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1050&q=80');"></div>
+                <div class="story-content">
+                    <div class="story-meta">Emotional · 12 min read</div>
+                    <h3>The Last Letter from Alexander</h3>
+                    <p>On her hundredth birthday, Elara received a yellowed envelope postmarked 1945. The words inside would rewrite her entire history.</p>
+                    <a href="./The Last Letter from Alexander.html" class="read-more">Read Full Story →</a>
+                </div>
+            </div>
+            
+            <!-- Story 3 -->
+            <div class="story-card">
+                <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1050&q=80');"></div>
+                <div class="story-content">
+                    <div class="story-meta">Inspirational · 6 min read</div>
+                    <h3>Dancing in the Rain</h3>
+                    <p>Diagnosed with a life-altering condition, Maya decided her wheelchair would become the vehicle for her greatest adventure yet.</p>
+                    <a href="#" class="read-more">Read Full Story →</a>
+                </div>
+            </div>
+
+            <!-- Story 4 -->
+            <div class="story-card">
+                <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1506260405121-e77d8d6ec14?ixlib=rb-4.0.3&auto=format&fit=crop&w=1045&q=80');"></div>
+                <div class="story-content">
+                    <div class="story-meta">Romantic · 10 min read</div>
+                    <h3>The Bookstore of Lost Memories</h3>
+                    <p>Every Tuesday, a mysterious man bought the same novel. Clara, the bookseller, never imagined she was a character in his story.</p>
+                    <a href="#" class="read-more">Read Full Story →</a>
+                </div>
+            </div>
+
+            <!-- Story 5 -->
+            <div class="story-card">
+                <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1464823063530-08f10ed1a2ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1050&q=80');"></div>
+                <div class="story-content">
+                    <div class="story-meta">Courage · 7 min read</div>
+                    <h3>Beneath the Northern Lights</h3>
+                    <p>To fulfill his daughter's last wish, a grieving father journeys to Iceland where the sky reveals more than just brilliant colors.</p>
+                    <a href="#" class="read-more">Read Full Story →</a>
+                </div>
+            </div>
+
+            <!-- Story 6 -->
+            <div class="story-card">
+                <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1476820865390-c52aeebb9891?ixlib=rb-4.0.3&auto=format&fit=crop&w=1050&q=80');"></div>
+                <div class="story-content">
+                    <div class="story-meta">Transformation · 15 min read</div>
+                    <h3>The Weight of Feathers</h3>
+                    <p>Once the world's most famous thief, Adrian now used his skills for restoration. But his greatest heist would be mending his own soul.</p>
+                    <a href="#" class="read-more">Read Full Story →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Decode Life Section -->
+    <section id="decode" class="container">
+        <h2 class="section-title">Decode Life</h2>
+        <p class="section-subtitle" style="text-align: center; margin-bottom: 2rem;">Personal reflections and lessons from Miqdad Bada Akorede</p>
+        
+        <div class="stories-grid">
+            <!-- Reflection 1 -->
+            <div class="story-card">
+                <div class="story-content">
+                    <div class="story-meta">Reflection · 5 min read</div>
+                    <h3>The Algorithm of Connection</h3>
+                    <p>In a world obsessed with digital metrics, I found the oldest code that truly connects us: eye contact, vulnerability, and shared silence.</p>
+                    <a href="#" class="read-more">Read Reflection →</a>
+                </div>
+            </div>
+            
+            <!-- Reflection 2 -->
+            <div class="story-card">
+                <div class="story-content">
+                    <div class="story-meta">Lesson · 4 min read</div>
+                    <h3>Failure's Hidden Syllabus</h3>
+                    <p>They never grade you on the most important lessons—how to get up, how to recalibrate, how to find a different path to the same dream.</p>
+                    <a href="#" class="read-more">Read Lesson →</a>
+                </div>
+            </div>
+            
+            <!-- Reflection 3 -->
+            <div class="story-card">
+                <div class="story-content">
+                    <div class="story-meta">Insight · 6 min read</div>
+                    <h3>On Building Both Tech and Souls</h3>
+                    <p>As both a technologist and storyteller, I've learned that the most elegant code can't compare to a well-told story that changes a heart.</p>
+                    <a href="#" class="read-more">Read Insight →</a>
+                </div>
+            </div>
+
+            <!-- Reflection 4 -->
+            <div class="story-card">
+                <div class="story-content">
+                    <div class="story-meta">Advice · 5 min read</div>
+                    <h3>Your Attention is Your Capital</h3>
+                    <p>In the economy of the digital age, what you pay attention to defines your life more than what you buy or earn. Invest it wisely.</p>
+                    <a href="#" class="read-more">Read Advice →</a>
+                </div>
+            </div>
+
+            <!-- Reflection 5 -->
+            <div class="story-card">
+                <div class="story-content">
+                    <div class="story-meta">Observation · 7 min read</div>
+                    <h3>The Poetry of Ordinary Moments</h3>
+                    <p>There are sonnets in steam rising from morning coffee, haikus in shared smiles with strangers, epics in waiting for the rain to stop.</p>
+                    <a href="#" class="read-more">Read Observation →</a>
+                </div>
+            </div>
+
+            <!-- Reflection 6 -->
+            <div class="story-card">
+                <div class="story-content">
+                    <div class="story-meta">Philosophy · 8 min read</div>
+                    <h3>Beyond the Screen: A Manifesto</h3>
+                    <p>We built digital worlds to connect, but found ourselves more isolated. It's time to reclaim narrative, presence, and the analog heart.</p>
+                    <a href="#" class="read-more">Read Philosophy →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Corner Section -->
+    <section id="community" class="container">
+        <h2 class="section-title">Community Corner</h2>
+        <p class="section-subtitle" style="text-align: center; margin-bottom: 2rem;">Where voices unite and experiences are shared</p>
+        
+        <div class="community-highlight">
+            <h3>Story of the Month</h3>
+            <p>"The Library of Forgotten Hopes" by Sarah J.</p>
+            <p>Sarah's poignant tale about discovering her grandmother's secret library of dreams deferred has touched hundreds of readers this month.</p>
+            <a href="#" class="btn" style="background-color: var(--cream); color: var(--ink-blue); margin-top: 1rem;">Read Sarah's Story</a>
+        </div>
+        
+        <h3 style="text-align: center; margin: 2rem 0;">Shared Experiences</h3>
+        <div class="stories-grid">
+            <!-- Shared Experience 1 -->
+            <div class="story-card">
+                <div class="story-content">
+                    <div class="story-meta">Shared by Michael T.</div>
+                    <h3>How "The Bridge of Second Chances" Changed My Perspective</h3>
+                    <p>After reading this story, I reached out to my brother after 7 years of silence. We're now rebuilding what I thought was lost forever.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+            
+            <!-- Shared Experience 2 -->
+            <div class="story-card">
+                <div class="story-content">
+                    <div class="story-meta">Shared by Aisha K.</div>
+                    <h3>My Journey Inspired by "Dancing in the Rain"</h3>
+                    <p>I was diagnosed with MS last year. Maya's story gave me the courage to start adaptive hiking. Here's my photo at the summit!</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quill Vault Section -->
+    <section id="vault" class="container">
+        <h2 class="section-title">Quill Vault</h2>
+        <p class="section-subtitle" style="text-align: center; margin-bottom: 2rem;">Archived stories and timeless series</p>
+        
+        <div class="stories-grid">
+            <!-- Archived Story 1 -->
+            <div class="story-card">
+                <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1457369804613-52c61a468e7d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1050&q=80');"></div>
+                <div class="story-content">
+                    <div class="story-meta">Classic · 9 min read · 2022</div>
+                    <h3>The Clockmaker's Secret</h3>
+                    <p>In a small Swiss town, a man who repaired time itself couldn't fix the one moment that broke his own heart.</p>
+                    <a href="#" class="read-more">Read Story →</a>
+                </div>
+            </div>
+            
+            <!-- Archived Story 2 -->
+            <div class="story-card">
+                <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=1051&q=80');"></div>
+                <div class="story-content">
+                    <div class="story-meta">Fan Favorite · 14 min read · 2022</div>
+                    <h3>Where the Forest Whispers</h3>
+                    <p>A biologist studying animal communication discovers the trees are speaking a language no human has ever documented.</p>
+                    <a href="#" class="read-more">Read Story →</a>
+                </div>
+            </div>
+            
+            <!-- Archived Story 3 -->
+            <div class="story-card">
+                <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1505506874110-6a7a69069a08?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80');"></div>
+                <div class="story-content">
+                    <div class="story-meta">Series: Part 1 · 11 min read · 2021</div>
+                    <h3>The Night Librarian</h3>
+                    <p>Every midnight, the library doors open to those who dream in ink. The first rule: never read your own future.</p>
+                    <a href="#" class="read-more">Read Story →</a>
+                </div>
+            </div>
+
+            <!-- Archived Story 4 -->
+            <div class="story-card">
+                <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1476820865390-c52aeebb9891?ixlib=rb-4.0.3&auto=format&fit=crop&w=1050&q=80');"></div>
+                <div class="story-content">
+                    <div class="story-meta">Series: Part 2 · 13 min read · 2021</div>
+                    <h3>The Night Librarian: Volume of Regrets</h3>
+                    <p>When a desperate man breaches the forbidden section, he discovers his greatest regret was never actually his to carry.</p>
+                    <a href="#" class="read-more">Read Story →</a>
+                </div>
+            </div>
+
+            <!-- Archived Story 5 -->
+            <div class="story-card">
+                <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1050&q=80');"></div>
+                <div class="story-content">
+                    <div class="story-meta">Short · 5 min read · 2021</div>
+                    <h3>The Last Lighthouse Keeper</h3>
+                    <p>Automation replaced his job, but he kept showing up anyway. The ships he guided now were those lost in storms of the soul.</p>
+                    <a href="#" class="read-more">Read Story →</a>
+                </div>
+            </div>
+
+            <!-- Archived Story 6 -->
+            <div class="story-card">
+                <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1050&q=80');"></div>
+                <div class="story-content">
+                    <div class="story-meta">Romance · 8 min read · 2020</div>
+                    <h3>Postcards from a Parallel World</h3>
+                    <p>Elara began receiving postcards from a version of herself who made different choices. The last card begged her not to make the same mistake.</p>
+                    <a href="#" class="read-more">Read Story →</a>
+                </div>
+            </div>
+
+            <!-- Archived Story 7 -->
+            <div class="story-card">
+                <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1452587925148-ce544e77e70d?ixlib=rb-4.0.3&auto=format&fit=crop&w=967&q=80');"></div>
+                <div class="story-content">
+                    <div class="story-meta">Mystery · 16 min read · 2020</div>
+                    <h3>The Silent Choir of St. Brigid</h3>
+                    <p>A deaf musician is hired to restore a historic pipe organ that supposedly plays a melody only those with regrets can hear.</p>
+                    <a href="#" class="read-more">Read Story →</a>
+                </div>
+            </div>
+
+            <!-- Archived Story 8 -->
+            <div class="story-card">
+                <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1050&q=80');"></div>
+                <div class="story-content">
+                    <div class="story-meta">Inspirational · 7 min read · 2020</div>
+                    <h3>The Map of Uncharted Stars</h3>
+                    <p>An aging astronomer discovers a childhood drawing that leads her to a breakthrough about cosmic strings and human connection.</p>
+                    <a href="#" class="read-more">Read Story →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="container">
+        <h2 class="section-title">About QuillX</h2>
+        <div style="max-width: 800px; margin: 0 auto 4rem; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <p style="margin-bottom: 1.5rem;">QuillX was founded by <strong>Miqdad Bada Akorede</strong> (also known as Imam Decoder), the founder of Ilm Nexus, co-founder of Techies Innovation, and a relationship management professional.</p>
+            <p style="margin-bottom: 1.5rem;">Our mission is to create a space where storytelling serves as a bridge between hearts and minds, where emotions are decoded into motivation, and where every reader finds a key to unlock their own inspiration.</p>
+            <p>"Every story is a key — unlock your inspiration."</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>QuillX</h3>
+                    <p>Where your heart meets words, and your dreams meet guidance.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Explore</h3>
+                    <p><a href="#featured">Featured Stories</a></p>
+                    <p><a href="#decode">Decode Life</a></p>
+                    <p><a href="#community">Community Corner</a></p>
+                    <p><a href="#vault">Quill Vault</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                    <p>contact@quillx.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 QuillX. Founded by Miqdad Bada Akorede. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for mobile menu toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
